@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="Bt_tests.Bluetooth_tests"/>
+<fullyQualifiedTypeName name="Threading.alreadyConnectedThread"/>
+<fullyQualifiedTypeName name="Threading.acceptNewThread"/>
+<fullyQualifiedTypeName name="com.example.bluetooth_app.R.id"/>
+</qualifiedTypeNameHistroy>
