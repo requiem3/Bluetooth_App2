@@ -9,4 +9,7 @@ public final class Constants {
 	public int SCONNECTED = 2;
 	public int SCONNECTING = 3;
 	
+	public int READ_MESSAGE = 2;
+	public int WRITE_MESSAGE = 3;
+	
 }

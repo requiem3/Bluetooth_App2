@@ -2,6 +2,7 @@ package Threading;
 
 
 import android.app.Activity;
+import android.os.Handler;
 import android.widget.TextView;
 
 import java.io.InputStream;
@@ -9,6 +10,7 @@ import java.io.OutputStream;
 import java.io.IOException;
 import com.example.bluetooth_app.R;
 import android.bluetooth.BluetoothSocket;
+import com.example.bluetooth_app.Constants;
 
 public class alreadyConnectedThread extends Thread {
     private TextView tView;
@@ -16,12 +18,17 @@ public class alreadyConnectedThread extends Thread {
 	private BluetoothSocket btSocket;
 	private InputStream iStream;
 	private OutputStream oStream;
+	private Handler mHandle;
+	private Constants constants;
 
-	public alreadyConnectedThread(Activity activity, BluetoothSocket socket) {
+	public alreadyConnectedThread(Activity activity, BluetoothSocket socket, Handler handler) {
 		this.activity = activity;
 		tView = (TextView) activity.findViewById(R.id.textView1);
+		constants = new Constants();
 		InputStream temp1 = null;
 		OutputStream temp2 = null;
+		btSocket = socket;
+		mHandle = handler;
 		
 		try {
 			temp1 = socket.getInputStream();
@@ -46,13 +53,12 @@ public class alreadyConnectedThread extends Thread {
 		
 		while(true) { //While connected to the InputStream
 			try {
-				bytes = iStream.read();
-				tView.setText("running");
+				bytes = iStream.read(buffer);
 				
-				//Handler.obtainMessage()
+				mHandle.obtainMessage(constants.READ_MESSAGE, bytes, -1, buffer).sendToTarget();
 			}
 			catch (IOException e) {
-				//TODO: do something shit broke
+				//TODO: need to restart thread listening mode
 				
 				break;
 			}
@@ -61,13 +67,21 @@ public class alreadyConnectedThread extends Thread {
 	
 	public void writeText(byte[] buffer) {
 		try {
-			// 	oStream.write(buffer);
-			String str = new String(buffer, "UTF-8");
-			tView.setText(str);
+			oStream.write(buffer);
+			
+			mHandle.obtainMessage(constants.WRITE_MESSAGE, -1, -1, buffer).sendToTarget();
 		}
 		catch (IOException e) {
-			//TODO: do something lol
-			tView.setText("failed to write");
+			//TODO: do something because we we suck lol
+		}
+	}
+	
+	public void end() {
+		try{
+			btSocket.close();
+		}
+		catch(IOException e) {
+			//TODO: do something we didnt close the open socket lol
 		}
 	}
 
