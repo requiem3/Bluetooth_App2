@@ -1,0 +1,10 @@
+package Threading;
+import android.bluetooth.BluetoothSocket;
+
+public class alreadyConnectedThread extends Threads {
+	
+	public alreadyConnectedThread(BluetoothSocket socket) {
+		
+	}
+
+}
