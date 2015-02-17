@@ -1,0 +1,28 @@
+package Bt_tests;
+
+import junit.framework.TestCase;
+import Threading.alreadyConnectedThread;
+import android.app.Activity;
+import android.bluetooth.BluetoothSocket;
+
+public class Bluetooth_tests extends TestCase {
+	private alreadyConnectedThread acThread;
+	private BluetoothSocket btSocket;
+	private Activity activity;
+	
+	public Bluetooth_tests(Activity activity) { //Constructor for the tests class  
+		this.activity = activity;
+	}
+	
+	public void startConnectedThread() { //starts the connected thread
+		btSocket = null;
+		acThread = new alreadyConnectedThread(activity, btSocket);
+		acThread.run();
+	}
+	
+	public void runConnectedThread() {
+		acThread = new alreadyConnectedThread(activity, btSocket);
+		byte[] buffer = "hi";
+		acThread.writeText();
+	}
+}
