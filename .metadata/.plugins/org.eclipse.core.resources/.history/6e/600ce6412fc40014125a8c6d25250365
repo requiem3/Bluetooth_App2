@@ -1,0 +1,23 @@
+package Threading;
+
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
+import android.bluetooth.BluetoothServerSocket;
+
+import java.io.IOException;
+
+public class acceptNewThread extends Thread {
+
+	public acceptNewThread(BluetoothDevice device, BluetoothAdapter blueAdapter) {
+		BluetoothServerSocket tmp = null;
+		
+		try{
+			tmp = mAdapter.listenUsing
+		}
+		catch(IOException e) {
+			
+		}
+		
+	}
+}

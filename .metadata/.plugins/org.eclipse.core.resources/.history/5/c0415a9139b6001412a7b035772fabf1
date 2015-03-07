@@ -1,7 +1,0 @@
-package Threading;
-
-
-public class Threads extends Thread {
-	
-	
-}

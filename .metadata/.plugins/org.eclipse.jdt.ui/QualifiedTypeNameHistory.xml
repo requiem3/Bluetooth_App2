@@ -4,4 +4,5 @@
 <fullyQualifiedTypeName name="Threading.alreadyConnectedThread"/>
 <fullyQualifiedTypeName name="Threading.acceptNewThread"/>
 <fullyQualifiedTypeName name="com.example.bluetooth_app.R.id"/>
+<fullyQualifiedTypeName name="java.util.UUID"/>
 </qualifiedTypeNameHistroy>
