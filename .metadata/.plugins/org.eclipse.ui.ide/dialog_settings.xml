@@ -12,6 +12,7 @@
 		<item value="false" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
 		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="C:\Users\requiem\Documents\GitHub\Bluetooth_App2\Bluetooth_App"/>
 			<item value="C:\Users\requiem\Documents\GitHub\Bluetooth_App"/>
 		</list>
 		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
