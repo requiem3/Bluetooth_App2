@@ -1,0 +1,23 @@
+package Threading;
+
+import android.bluetooth.BluetoothSocket;
+import android.bluetooth.BluetoothDevice;
+import android.app.Activity;
+
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.IOException;
+
+public class newConnectionThread extends Threads {
+	private BluetoothSocket btSocket;
+	private Activity activity;
+	
+	public newConnectionThread(BluetoothSocket socket, Activity activity) {
+		this.activity = activity;
+
+	}
+	
+	public void end() {
+		
+	}
+}

@@ -1,0 +1,36 @@
+package Threading;
+
+import android.bluetooth.BluetoothSocket;
+import android.bluetooth.BluetoothDevice;
+import android.app.Activity;
+
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.IOException;
+import java.util.UUID;
+
+public class newConnectionThread extends Threads {
+	private BluetoothSocket btSocket;
+	private BluetoothDevice btDevice;
+	private Activity activity;
+	private static final UUID INSECURE_UUID = UUID.fromString("5c978ab2-b6eb-11e4-a71e-12e3f512a338"); //From https://www.uuidgenerator.net/
+	
+	public newConnectionThread(BluetoothDevice device) {
+		this.activity = activity;
+		BluetoothSocket temp1 = null;
+		btDevice = device;
+		
+		try {
+			temp1 = device.createInsecureRfcommSocketToServiceRecord(INSECURE_UUID);
+		}
+		catch(IOException e) {
+			//TODO: should do something for an error lol
+		}
+		
+		btSocket = temp1;
+	}
+	
+	public void end() {
+		
+	}
+}

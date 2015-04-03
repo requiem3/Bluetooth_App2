@@ -1,0 +1,12 @@
+package Threading;
+
+import android.os.Handler;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothServerSocket;
+import android.bluetooth.BluetoothSocket;
+
+public class Threads extends Thread {
+	
+	
+}
