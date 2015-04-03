@@ -46,7 +46,6 @@ public class acceptNewThread extends Thread {
 			if(btSocket != null) {
 				switch(consts.curState) {
 					case 3://Connecting					
-						//run connected function which has not been made yet
 						break;
 					case 2://Connected
 						try{

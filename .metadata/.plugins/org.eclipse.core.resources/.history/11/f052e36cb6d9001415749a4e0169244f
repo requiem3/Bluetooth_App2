@@ -3,7 +3,6 @@ package com.example.bluetooth_app;
 import java.util.Set;
 
 
-
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -19,7 +18,6 @@ import android.widget.ListView;
 
 import Bt_tests.Bluetooth_tests;
 import Threading.alreadyConnectedThread;
-import com.example.bluetooth_app.*;
 
 public class Bluetooth {
 	private Constants constants;
@@ -33,7 +31,6 @@ public class Bluetooth {
 	private ListView lvBox; //listview box
 	private BluetoothSocket btSocket;
 	
-	private Chat btChat;
 	private Bluetooth_tests btTests;
 	private alreadyConnectedThread acThread;
     
@@ -43,7 +40,6 @@ public class Bluetooth {
 	public Bluetooth(Activity activity) {
 		btTests = new Bluetooth_tests(activity);
 		constants = new Constants();
-		btChat = new Chat();
 		this.activity = activity; //Set class activity to the activity passed to it by the main activity window
 		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 		 
@@ -59,7 +55,7 @@ public class Bluetooth {
 		pButton = (Button) activity.findViewById(R.id.pairedButton); //pButton = pairedButton
 		pButton.setOnClickListener(new View.OnClickListener() { //Listener to check if button is pressed
 			public void onClick(View v) { //If button is pressed find all paired devices and populate listView/run tests on threads
-				pairedDevices();
+				btTests.startConnectedThread();
 			}
 		});
 		

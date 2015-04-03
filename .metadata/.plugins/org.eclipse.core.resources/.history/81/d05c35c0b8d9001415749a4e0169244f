@@ -43,7 +43,6 @@ public class Bluetooth {
 	public Bluetooth(Activity activity) {
 		btTests = new Bluetooth_tests(activity);
 		constants = new Constants();
-		btChat = new Chat();
 		this.activity = activity; //Set class activity to the activity passed to it by the main activity window
 		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 		 

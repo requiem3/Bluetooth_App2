@@ -1,8 +1,0 @@
-package Threading;
-
-public class acceptNewThread extends Thread {
-
-	public acceptNewThread() {
-
-	}
-}
