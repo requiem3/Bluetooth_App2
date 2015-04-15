@@ -18,14 +18,13 @@ public class newConnectionThread extends Thread {
 	private BluetoothDevice btDevice;
 	private Activity activity;
 	private Constants consts;
-	private Chat mChat;
 	
-	public newConnectionThread(BluetoothDevice device, BluetoothAdapter blueAdapter, Chat iChat) {
+	public newConnectionThread(BluetoothDevice device, BluetoothAdapter blueAdapter) {
+		this.activity = activity;
 		btAdapter = blueAdapter;
 		BluetoothSocket temp1 = null;
 		btDevice = device;
 		consts = new Constants();
-		mChat = iChat;
 		
 		try {
 			temp1 = device.createInsecureRfcommSocketToServiceRecord(consts.INSECURE_UUID);
@@ -52,9 +51,10 @@ public class newConnectionThread extends Thread {
 			}
 		}
 		
-		mChat.ncThread = null; //Finished the thread, end it, but its over in the chat class lol, shitty setup
+		//Need to reset the thread
+		//Cant do this yet because the function you need does not exist
 		
-		mChat.connected(btSocket, btDevice);
+		//Run function to start the connected thread (doesn't exist yet)
 		
 	}
 	
