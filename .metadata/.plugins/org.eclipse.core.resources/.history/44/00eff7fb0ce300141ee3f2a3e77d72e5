@@ -59,23 +59,6 @@ public class Chat {
 		}
 	}
 	
-	public void stop() {
-		if(ncThread != null) {
-			ncThread.end();
-			ncThread = null;
-		}
-		
-		if(acThread != null) {
-			acThread.end();
-			acThread = null;
-		}
-		
-		if(anThread != null) {
-			anThread.cancel();
-			anThread = null;
-		}
-	}
-	
 	public void connect(BluetoothDevice device) {
 		if(state == constants.SCONNECTING) { //Cancel currently connecting threads so we can create a new one
 			if(ncThread != null) {

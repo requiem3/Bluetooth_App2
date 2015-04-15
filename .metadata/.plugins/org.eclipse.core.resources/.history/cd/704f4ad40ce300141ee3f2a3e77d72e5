@@ -14,13 +14,13 @@ public class Bluetooth_tests extends TestCase {
 		this.activity = activity;
 	}
 	
-	//This test no longer works after new implementation
+	//This test no longer works after new implementatio
 	public void startConnectedThread() { //starts the connected thread
 	//	acThread = new alreadyConnectedThread(activity); 
 		acThread.run();
 	}
 	
-	//This test no longer works after new implementation
+	//This test no longer works after new implementatio
 	public void runConnectedThread() {
 	//	acThread = new alreadyConnectedThread(activity);
 		byte[] buffer = "hi".getBytes();

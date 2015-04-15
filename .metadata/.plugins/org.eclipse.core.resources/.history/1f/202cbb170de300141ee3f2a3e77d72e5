@@ -20,6 +20,7 @@ public class newConnectionThread extends Thread {
 	private Constants consts;
 	
 	public newConnectionThread(BluetoothDevice device, BluetoothAdapter blueAdapter) {
+		this.activity = activity;
 		btAdapter = blueAdapter;
 		BluetoothSocket temp1 = null;
 		btDevice = device;

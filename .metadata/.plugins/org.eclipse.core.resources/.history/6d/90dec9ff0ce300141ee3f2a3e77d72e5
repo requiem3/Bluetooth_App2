@@ -71,7 +71,7 @@ public class Chat {
 		}
 		
 		if(anThread != null) {
-			anThread.cancel();
+			anThread.end();
 			anThread = null;
 		}
 	}
