@@ -1,10 +1,16 @@
 package com.example.bluetooth_app;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.lang.reflect.Method;
 import java.util.Set;
+import java.util.UUID;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -15,9 +21,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.AdapterView;
-
+import android.widget.TextView;
 import Bt_tests.Bluetooth_tests;
 import Threading.alreadyConnectedThread;
+
 import com.example.bluetooth_app.*;
 
 public class Bluetooth {
@@ -31,6 +38,12 @@ public class Bluetooth {
 	private Button pButton; //Paired Button
 	private ListView lvBox; //listview box
 	private BluetoothSocket btSocket;
+	private BluetoothServerSocket btServSocket;
+	private TextView tView;
+	
+	private InputStream iStream;
+	private OutputStream oStream;
+	private Integer state = 0;
 	
 	private Chat btChat;
 	private Bluetooth_tests btTests;
@@ -45,6 +58,7 @@ public class Bluetooth {
 		this.activity = activity; //Set class activity to the activity passed to it by the main activity window
 		btChat = new Chat();
 		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+		tView = (TextView) activity.findViewById(R.id.textView1);
 		 
 		sButton = (Button) activity.findViewById(R.id.scanButton); //sButton = scan button
 		sButton.setOnClickListener(new View.OnClickListener() { //Listener to check if button is pressed
@@ -78,7 +92,24 @@ public class Bluetooth {
         		Object o = lvBox.getItemAtPosition(position); //Object that has been selected
         		String parts[] = o.toString().split("\n"); //parts[0] = name, [1] = MAC address
         		
-        		btChat.connect(mBluetoothAdapter.getRemoteDevice(parts[1]));
+        		
+        		mBluetoothAdapter.cancelDiscovery();
+        		try {
+        			btServSocket = mBluetoothAdapter.listenUsingRfcommWithServiceRecord
+        			(constants.NAME_INSECURE, constants.INSECURE_UUID);
+        		} catch(IOException e) {
+        			//TODO: something
+        			tView.setText("damn error");
+        		}
+        		
+        		try {
+        			btSocket = btServSocket.accept();
+        		} catch(IOException e) {
+        			//TODO: something
+        			tView.setText("didnt accept");
+        		}
+        		
+        		//btChat.connect(mBluetoothAdapter.getRemoteDevice(parts[1])); ignore this for now
         	}
         });
         
@@ -91,6 +122,25 @@ public class Bluetooth {
         activity.registerReceiver(mReceiver, filter);
         
         btChat.start();
+	}
+	
+	public void run() {
+		
+		while(state == 0) {
+			tView.setText("listening");
+			
+			try {
+				iStream = btSocket.getInputStream();
+			} catch(IOException e) {
+				
+			}
+			
+			try {
+				oStream = btSocket.getOutputStream();
+			} catch(IOException e) {
+				
+			}
+		}
 	}
 	
 	/**
