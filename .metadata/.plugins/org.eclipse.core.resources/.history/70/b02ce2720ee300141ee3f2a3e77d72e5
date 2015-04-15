@@ -52,9 +52,9 @@ public class newConnectionThread extends Thread {
 			}
 		}
 		
-		mChat.ncThread = null; //Finished the thread, end it, but its over in the chat class lol, shitty setup
+		mChat.ncThread = null; //Finished the thread, end it, butits over in the chat class lol, shitty setup
 		
-		mChat.connected(btSocket, btDevice);
+		//Run function to start the connected thread (doesn't exist yet)
 		
 	}
 	

@@ -25,7 +25,6 @@ public class newConnectionThread extends Thread {
 		BluetoothSocket temp1 = null;
 		btDevice = device;
 		consts = new Constants();
-		mChat = iChat;
 		
 		try {
 			temp1 = device.createInsecureRfcommSocketToServiceRecord(consts.INSECURE_UUID);
@@ -52,9 +51,9 @@ public class newConnectionThread extends Thread {
 			}
 		}
 		
-		mChat.ncThread = null; //Finished the thread, end it, but its over in the chat class lol, shitty setup
 		
-		mChat.connected(btSocket, btDevice);
+		
+		//Run function to start the connected thread (doesn't exist yet)
 		
 	}
 	

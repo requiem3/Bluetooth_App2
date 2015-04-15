@@ -47,8 +47,7 @@ public class acceptNewThread extends Thread {
 			
 			if(btSocket != null) {
 				switch(consts.curState) {
-					case 3://Connecting		
-						mChat.connected(btSocket, btSocket.getRemoteDevice());
+					case 3://Connecting					
 						break;
 					case 2://Connected
 						try{

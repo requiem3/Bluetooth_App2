@@ -22,6 +22,18 @@ public class Chat {
 		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 		state = constants.SNONE;
 	}
+	/**
+	 * Initialize Chat object with the state of the chat set to none, and the handle equal to the handle we passed it, also get the default
+	 * bluetooth adapter that we need for everything
+	 * @param context
+	 * @param handler
+	 */
+	public Chat(Context context, Handler handler) {
+		constants = new Constants();
+		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+		state = constants.SNONE; //Current state is nothing, just initialized, derp
+		chatHandle = handler; 
+	}
 	
 	public int getState() { //Return the current state of the chat object
 		return state;
