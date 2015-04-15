@@ -49,8 +49,6 @@ public class Bluetooth {
 	private Chat btChat;
 	private Bluetooth_tests btTests;
 	private alreadyConnectedThread acThread;
-	
-	private runThread mRunThread;
     
 	/**
 	 * default constructor, basic initializations
@@ -59,9 +57,8 @@ public class Bluetooth {
 		btSocket = null;
 		btTests = new Bluetooth_tests(activity);
 		constants = new Constants();
-		mRunThread = new runThread();
 		this.activity = activity; //Set class activity to the activity passed to it by the main activity window
-		//btChat = new Chat();
+		btChat = new Chat();
 		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 		tView = (TextView) activity.findViewById(R.id.textView1);
 		 
@@ -106,11 +103,6 @@ public class Bluetooth {
         			//TODO: something
         		}
         		
-        		if(btSocket != null) {
-        			state = 1;
-        			tView.setText("connected 2");
-        			mRunThread.start();
-        		}
         		
         		//btChat.connect(mBluetoothAdapter.getRemoteDevice(parts[1])); ignore this for now
         	}
@@ -125,21 +117,15 @@ public class Bluetooth {
         activity.registerReceiver(mReceiver, filter);
         
         //btChat.start();
-        mRunThread.start();
+        while(true) {
+        	run();
+        }
 	}
 	
-	/*
 	public void run() {
-		//state 0 = listening
-		//state 1 = connected
-		
 		while(state == 0) {
-			if(mBluetoothAdapter.isDiscovering()) {
-				mBluetoothAdapter.cancelDiscovery();
-			} 
-			if(tView.getText() != "listening") {
-				tView.setText("listening");
-			}
+			mBluetoothAdapter.cancelDiscovery();
+			tView.setText("listening");
 			
 			try {
     			btServSocket = mBluetoothAdapter.listenUsingInsecureRfcommWithServiceRecord
@@ -163,14 +149,9 @@ public class Bluetooth {
     		}
 		}
 		
-	}
-	*/
-	public void write() {
-		
-	}
-	
-	public void read() {
-		
+		while(state == 1) {
+			
+		}
 	}
 	
 	/**
@@ -259,49 +240,6 @@ public class Bluetooth {
     
     public void timeToPanic() { //When its time to panic, its time to panic
     	System.exit(1); //Force close the app
-    }
-    
-    public class runThread extends Thread {
-    	
-    	public runThread() {
-
-    	}
-    	
-    	public void run() {
-    		while(state == 0) {
-    			if(mBluetoothAdapter.isDiscovering()) {
-    				mBluetoothAdapter.cancelDiscovery();
-    			} 
-    			
-    			if(tView.getText() != "listening") {
-    				tView.setText("listening");
-    			}
-    			
-    			try {
-        			btServSocket = mBluetoothAdapter.listenUsingInsecureRfcommWithServiceRecord
-        			(constants.NAME_INSECURE, constants.INSECURE_UUID);
-        		} catch(IOException e) {
-        			//TODO: something
-        			tView.setText("damn error");
-        		}
-        		
-        		try {
-        			btSocket = btServSocket.accept();
-        		} catch(IOException e) {
-        			//TODO: something
-        			tView.setText("didnt accept");
-        		}
-        		
-        		if(btSocket != null) {
-        			state = 1;
-        			tView.setText("btSocket created");
-        			run();
-        		}
-    		}
-    		while(state == 1) {
-    			
-    		}
-    	}
     }
 	
 }
