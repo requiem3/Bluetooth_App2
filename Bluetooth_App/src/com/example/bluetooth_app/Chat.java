@@ -12,12 +12,14 @@ public class Chat {
 	private Constants constants;
 	private BluetoothAdapter mBluetoothAdapter; 
 	private int state; //Current state of the class(none, listening, connected, or connecting)
-	private final Handler chatHandle; //Handle to the chat
+	private Handler chatHandle; //Handle to the chat
 	private newConnectionThread ncThread; //ConnectThread
 	private alreadyConnectedThread acThread; //ConnectedThread
 	private acceptNewThread anThread; //AcceptThread
 
-	
+	public Chat() {
+		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+	}
 	/**
 	 * Initialize Chat object with the state of the chat set to none, and the handle equal to the handle we passed it, also get the default
 	 * bluetooth adapter that we need for everything

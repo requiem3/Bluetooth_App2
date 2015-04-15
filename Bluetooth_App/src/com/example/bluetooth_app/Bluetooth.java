@@ -2,6 +2,7 @@ package com.example.bluetooth_app;
 
 import java.util.Set;
 
+
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.AdapterView;
 
 import Bt_tests.Bluetooth_tests;
 import Threading.alreadyConnectedThread;
@@ -69,6 +71,15 @@ public class Bluetooth {
         
         nDevices = new ArrayAdapter<String>(activity, android.R.layout.simple_list_item_1);
         lvBox.setAdapter(nDevices);
+        
+        lvBox.setClickable(true);
+        lvBox.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        	@Override
+        	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+        		Object o = lvBox.getItemAtPosition(position); //Object that has been selected
+        		//pButton.setText(o.toString());
+        	}
+        });
         
         // Register for broadcasts when a device is discovered
         filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);

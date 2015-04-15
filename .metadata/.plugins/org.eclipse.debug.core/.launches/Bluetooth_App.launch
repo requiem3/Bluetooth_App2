@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="net.sf.amateras.air.launchAIRConfigurationType">
+<stringAttribute key="air.project" value="Bluetooth_App"/>
+<stringAttribute key="air.target" value="application.xml"/>
+<stringAttribute key="air.target.enable.lanch" value="false"/>
+<booleanAttribute key="org.eclipse.debug.ui.ATTR_LAUNCH_IN_BACKGROUND" value="false"/>
+</launchConfiguration>
