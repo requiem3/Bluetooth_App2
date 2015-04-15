@@ -107,9 +107,17 @@ public class Bluetooth {
         		}
         		
         		if(btSocket != null) {
+        			mBluetoothAdapter.cancelDiscovery();
         			state = 1;
         			tView.setText("connected 2");
+        			
+        			if(mRunThread.isAlive()) { //kill the current running thread
+        				mRunThread.interrupt();
+        			}
+        			
+        			mRunThread = new runThread(); //Create a new one
         			mRunThread.start();
+        			
         		}
         		
         		//btChat.connect(mBluetoothAdapter.getRemoteDevice(parts[1])); ignore this for now
@@ -126,51 +134,6 @@ public class Bluetooth {
         
         //btChat.start();
         mRunThread.start();
-	}
-	
-	/*
-	public void run() {
-		//state 0 = listening
-		//state 1 = connected
-		
-		while(state == 0) {
-			if(mBluetoothAdapter.isDiscovering()) {
-				mBluetoothAdapter.cancelDiscovery();
-			} 
-			if(tView.getText() != "listening") {
-				tView.setText("listening");
-			}
-			
-			try {
-    			btServSocket = mBluetoothAdapter.listenUsingInsecureRfcommWithServiceRecord
-    			(constants.NAME_INSECURE, constants.INSECURE_UUID);
-    		} catch(IOException e) {
-    			//TODO: something
-    			tView.setText("damn error");
-    		}
-    		
-    		try {
-    			btSocket = btServSocket.accept();
-    		} catch(IOException e) {
-    			//TODO: something
-    			tView.setText("didnt accept");
-    		}
-    		
-    		if(btSocket != null) {
-    			state = 1;
-    			tView.setText("btSocket created");
-    			run();
-    		}
-		}
-		
-	}
-	*/
-	public void write() {
-		
-	}
-	
-	public void read() {
-		
 	}
 	
 	/**
@@ -258,13 +221,18 @@ public class Bluetooth {
     };
     
     public void timeToPanic() { //When its time to panic, its time to panic
+    	mBluetoothAdapter.cancelDiscovery();
     	System.exit(1); //Force close the app
     }
     
     public class runThread extends Thread {
+    	//state 0 = listening
+    	//state 1 = attempting to connect
+    	//state 2 = 
+    	//state 3 = connected, manage it
     	
     	public runThread() {
-
+    		
     	}
     	
     	public void run() {
@@ -297,9 +265,53 @@ public class Bluetooth {
         			tView.setText("btSocket created");
         			run();
         		}
+        		
     		}
+    		
     		while(state == 1) {
+    			try {
+    				iStream = btSocket.getInputStream();
+    			} catch(IOException e) {
+    				//TODO: something
+    				tView.setText("no Istream");
+    			}
     			
+    			try {
+    				oStream = btSocket.getOutputStream();
+    			} catch(IOException e) {
+    				//TODO: something
+    				tView.setText("no oStream");    			
+    			}
+    			
+    			state = 3;
+    			run();
+    		}
+    		
+    		while(state == 2) {
+    			
+    		}
+    		
+    		while(state == 3) {
+    			read();
+    		}
+    	}
+    	
+    	public void read() {
+    		byte buffer[] = new byte[1024];
+    		int bytes;
+    		
+    		try {
+    			bytes = iStream.read(buffer);
+    		} catch(IOException e) {
+    			//TODO: something
+    		}
+    	}
+    	
+    	public void writeText(byte bytes[]) {
+    		try {
+    			oStream.write(bytes);
+    		} catch(IOException e) {
+    			//TODO: something
     		}
     	}
     }
