@@ -42,8 +42,8 @@ public class Bluetooth {
 	public Bluetooth(Activity activity) {
 		btTests = new Bluetooth_tests(activity);
 		constants = new Constants();
-		btChat = new Chat();
 		this.activity = activity; //Set class activity to the activity passed to it by the main activity window
+		btChat = new Chat();
 		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 		 
 		sButton = (Button) activity.findViewById(R.id.scanButton); //sButton = scan button

@@ -1,11 +1,13 @@
 package Threading;
 
 import android.bluetooth.BluetoothSocket;
+
 import com.example.bluetooth_app.*;
 
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothAdapter;
 import android.app.Activity;
+import android.widget.TextView;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -19,6 +21,7 @@ public class newConnectionThread extends Thread {
 	private Activity activity;
 	private Constants consts;
 	private Chat mChat;
+	private TextView tView;
 	
 	public newConnectionThread(BluetoothDevice device, BluetoothAdapter blueAdapter, Chat iChat) {
 		btAdapter = blueAdapter;
@@ -50,6 +53,7 @@ public class newConnectionThread extends Thread {
 			catch(IOException f) {
 				//TODO: something
 			}
+			return;
 		}
 		
 		mChat.ncThread = null; //Finished the thread, end it, but its over in the chat class lol, shitty setup

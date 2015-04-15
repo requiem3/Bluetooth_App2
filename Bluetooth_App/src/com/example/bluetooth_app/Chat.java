@@ -4,7 +4,8 @@ import Threading.*;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
-
+import android.app.Activity;
+import android.widget.TextView;
 import android.content.Context;
 import android.os.Handler;
 
@@ -16,6 +17,9 @@ public class Chat {
 	public newConnectionThread ncThread; //ConnectThread
 	private alreadyConnectedThread acThread; //ConnectedThread
 	private acceptNewThread anThread; //AcceptThread
+	private Activity activity;
+	
+	private TextView tView;
 
 	public Chat() {
 		constants = new Constants();
@@ -100,7 +104,7 @@ public class Chat {
 			anThread.cancel();
 			anThread = null;
 		}
-		
+
 		acThread = new alreadyConnectedThread(mBtSocket);
 		acThread.start();
 	}
