@@ -98,8 +98,8 @@ public class Bluetooth {
         		mDevice = mBluetoothAdapter.getRemoteDevice(parts[1]);
         		
         		try {
-        			btSocket = mDevice.createInsecureRfcommSocketToServiceRecord(constants.INSECURE_UUID);
-        		} catch(IOException e) {
+        			mDevice.createInsecureRfcommSocketToServiceRecord(constants.INSECURE_UUID);
+        		} catch(IOException) {
         			//TODO: something
         		}
         		

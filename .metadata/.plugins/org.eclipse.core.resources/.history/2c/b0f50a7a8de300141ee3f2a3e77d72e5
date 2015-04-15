@@ -39,7 +39,6 @@ public class Bluetooth {
 	private ListView lvBox; //listview box
 	private BluetoothSocket btSocket;
 	private BluetoothServerSocket btServSocket;
-	private BluetoothDevice mDevice;
 	private TextView tView;
 	
 	private InputStream iStream;
@@ -54,7 +53,6 @@ public class Bluetooth {
 	 * default constructor, basic initializations
 	 */
 	public Bluetooth(Activity activity) {
-		btSocket = null;
 		btTests = new Bluetooth_tests(activity);
 		constants = new Constants();
 		this.activity = activity; //Set class activity to the activity passed to it by the main activity window
@@ -95,14 +93,7 @@ public class Bluetooth {
         		String parts[] = o.toString().split("\n"); //parts[0] = name, [1] = MAC address
         		
         		
-        		mDevice = mBluetoothAdapter.getRemoteDevice(parts[1]);
-        		
-        		try {
-        			btSocket = mDevice.createInsecureRfcommSocketToServiceRecord(constants.INSECURE_UUID);
-        		} catch(IOException e) {
-        			//TODO: something
-        		}
-        		
+        		mBluetoothAdapter.cancelDiscovery();
         		
         		//btChat.connect(mBluetoothAdapter.getRemoteDevice(parts[1])); ignore this for now
         	}
@@ -116,13 +107,12 @@ public class Bluetooth {
         filter = new IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
         activity.registerReceiver(mReceiver, filter);
         
-        //btChat.start();
-        run();
+        btChat.start();
 	}
 	
 	public void run() {
+		
 		while(state == 0) {
-			mBluetoothAdapter.cancelDiscovery();
 			tView.setText("listening");
 			
 			try {
