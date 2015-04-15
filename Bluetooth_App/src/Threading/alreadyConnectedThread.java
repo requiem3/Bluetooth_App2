@@ -21,14 +21,12 @@ public class alreadyConnectedThread extends Thread {
 	private Handler mHandle;
 	private Constants constants;
 
-	public alreadyConnectedThread(Activity activity, BluetoothSocket socket, Handler handler) {
-		this.activity = activity;
+	public alreadyConnectedThread(BluetoothSocket socket) {
 		tView = (TextView) activity.findViewById(R.id.textView1);
 		constants = new Constants();
 		InputStream temp1 = null;
 		OutputStream temp2 = null;
 		btSocket = socket;
-		mHandle = handler;
 		
 		try {
 			temp1 = socket.getInputStream();
@@ -42,10 +40,10 @@ public class alreadyConnectedThread extends Thread {
 		oStream = temp2;
 	}
 	
-	public alreadyConnectedThread(Activity activity) {
-		this.activity = activity;
-		tView = (TextView) activity.findViewById(R.id.textView1);
-	}
+	//public alreadyConnectedThread(Activity activity) {
+		//this.activity = activity;
+		//tView = (TextView) activity.findViewById(R.id.textView1);
+	//}
 	
 	public void run() {
 		byte[] buffer = new byte[1024];

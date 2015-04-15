@@ -16,9 +16,11 @@ public class acceptNewThread extends Thread {
 	private BluetoothAdapter btAdapter;
 	private Activity activity;
 	private Constants consts;
+	private Chat mChat;
 	
-	public acceptNewThread(BluetoothAdapter blueAdapter) {
+	public acceptNewThread(BluetoothAdapter blueAdapter, Chat iChat) {
 		consts = new Constants();
+		mChat = iChat;
 		btAdapter = blueAdapter;
 		BluetoothServerSocket tmp = null;
 		
@@ -45,7 +47,8 @@ public class acceptNewThread extends Thread {
 			
 			if(btSocket != null) {
 				switch(consts.curState) {
-					case 3://Connecting					
+					case 3://Connecting		
+						mChat.connected(btSocket, btSocket.getRemoteDevice());
 						break;
 					case 2://Connected
 						try{
