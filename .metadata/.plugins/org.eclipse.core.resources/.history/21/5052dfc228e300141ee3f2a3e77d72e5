@@ -43,6 +43,7 @@ public class Bluetooth {
 		btTests = new Bluetooth_tests(activity);
 		constants = new Constants();
 		btChat = new Chat();
+		btChat.start();
 		this.activity = activity; //Set class activity to the activity passed to it by the main activity window
 		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 		 
@@ -76,9 +77,9 @@ public class Bluetooth {
         	@Override
         	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
         		Object o = lvBox.getItemAtPosition(position); //Object that has been selected
-        		String parts[] = o.toString().split("\n"); //parts[0] = name, [1] = MAC address
+        		String parts[] = o.toString().split("\n");
         		
-        		btChat.connect(mBluetoothAdapter.getRemoteDevice(parts[1]));
+        		pButton.setText(parts[1]);
         	}
         });
         
@@ -89,8 +90,6 @@ public class Bluetooth {
         // Register for broadcasts when discovery has finished
         filter = new IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
         activity.registerReceiver(mReceiver, filter);
-        
-        btChat.start();
 	}
 	
 	/**

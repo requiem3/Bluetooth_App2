@@ -78,7 +78,7 @@ public class Bluetooth {
         		Object o = lvBox.getItemAtPosition(position); //Object that has been selected
         		String parts[] = o.toString().split("\n"); //parts[0] = name, [1] = MAC address
         		
-        		btChat.connect(mBluetoothAdapter.getRemoteDevice(parts[1]));
+        		pButton.setText(parts[1]);
         	}
         });
         

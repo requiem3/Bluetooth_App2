@@ -76,9 +76,9 @@ public class Bluetooth {
         	@Override
         	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
         		Object o = lvBox.getItemAtPosition(position); //Object that has been selected
-        		String parts[] = o.toString().split("\n"); //parts[0] = name, [1] = MAC address
+        		String parts[] = o.toString().split("\n");
         		
-        		btChat.connect(mBluetoothAdapter.getRemoteDevice(parts[1]));
+        		pButton.setText(parts[1]);
         	}
         });
         

@@ -46,11 +46,10 @@ public class Chat {
 		
 		if(anThread == null) { //Start listening for incoming threads
 			anThread = new acceptNewThread(mBluetoothAdapter, this);
-			anThread.start();
 		}
 	}
 	
-	public void stop() { //stop everything /panic
+	public void stop() {
 		if(ncThread != null) {
 			ncThread.end();
 			ncThread = null;
