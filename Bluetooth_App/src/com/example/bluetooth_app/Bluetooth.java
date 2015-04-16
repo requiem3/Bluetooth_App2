@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.AdapterView;
 import android.widget.TextView;
@@ -43,6 +44,7 @@ public class Bluetooth {
 	private BluetoothServerSocket btServSocket;
 	private BluetoothDevice mDevice;
 	private TextView tView;
+	private EditText eText;
 	
 	private InputStream iStream;
 	private OutputStream oStream;
@@ -76,10 +78,14 @@ public class Bluetooth {
 			}
 		});
 		
+		eText = (EditText) activity.findViewById(R.id.editText1);
+		
 		tButton = (Button) activity.findViewById(R.id.sendButton); //sButton = scan button
 		tButton.setOnClickListener(new View.OnClickListener() { //Listener to check if button is pressed
 			public void onClick(View v) { //If button is pressed start discovering and hide button
-				mRunThread.writeText("hi".getBytes());
+				
+				String temp = eText.getText().toString();
+				mRunThread.writeText(temp.getBytes());
 			}
 		});
 		
@@ -172,6 +178,10 @@ public class Bluetooth {
 		} else {
 			return true;
 		}
+	}
+	
+	public void updateTView(int bytes) {
+		tView.setText(String.valueOf(bytes));
 	}
 	
 	/**
@@ -321,11 +331,17 @@ public class Bluetooth {
     	
     	public void read() {
     		byte buffer[] = new byte[1024];
-    		int bytes;
+    		final int bytes;
     		
     		try {
     			bytes = iStream.read(buffer);
-
+    			
+    			activity.runOnUiThread(new Runnable() {
+    				@Override
+    				public void run() {
+    					updateTView(bytes);
+    				}
+    			});
     			Log.i("WTF",String.valueOf(bytes));
     		} catch(IOException e) {
     			//TODO: something

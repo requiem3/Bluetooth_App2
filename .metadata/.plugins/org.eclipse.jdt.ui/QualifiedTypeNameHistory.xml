@@ -4,5 +4,13 @@
 <fullyQualifiedTypeName name="Threading.alreadyConnectedThread"/>
 <fullyQualifiedTypeName name="Threading.acceptNewThread"/>
 <fullyQualifiedTypeName name="com.example.bluetooth_app.R.id"/>
+<fullyQualifiedTypeName name="java.io.IOException"/>
+<fullyQualifiedTypeName name="java.lang.reflect.Method"/>
 <fullyQualifiedTypeName name="java.util.UUID"/>
+<fullyQualifiedTypeName name="android.widget.TextView"/>
+<fullyQualifiedTypeName name="android.bluetooth.BluetoothServerSocket"/>
+<fullyQualifiedTypeName name="java.io.InputStream"/>
+<fullyQualifiedTypeName name="java.io.OutputStream"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="java.lang.Byte"/>
 </qualifiedTypeNameHistroy>
