@@ -35,6 +35,7 @@ public class Bluetooth {
 	private Activity activity; //Activity to store main window's activity
 	private ArrayAdapter<String> pDevices; //Array adapter for storing already paired devices
 	private ArrayAdapter<String> nDevices; //Array adapter for storing newly discovered devices
+	private ArrayAdapter<String> mMessages; //Array adapter for messages
 	private IntentFilter filter; //Filter for catching bluetooth device actions
 	private Button sButton; //Scan button
 	private Button pButton; //Paired Button
@@ -180,8 +181,8 @@ public class Bluetooth {
 		}
 	}
 	
-	public void updateTView(int bytes) {
-		tView.setText(String.valueOf(bytes));
+	public void updateTView(String message) {
+		tView.setText(message);
 	}
 	
 	/**
@@ -329,17 +330,23 @@ public class Bluetooth {
     		}
     	}
     	
+    	public String convertStreamToString(java.io.InputStream is) {
+    	    java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
+    	    return s.hasNext() ? s.next() : "";
+    	}
+    	
     	public void read() {
     		byte buffer[] = new byte[1024];
     		final int bytes;
     		
     		try {
     			bytes = iStream.read(buffer);
+    			final String readMessage = new String(buffer, 0, bytes);
     			
     			activity.runOnUiThread(new Runnable() {
     				@Override
     				public void run() {
-    					updateTView(bytes);
+    					updateTView(readMessage);
     				}
     			});
     			Log.i("WTF",String.valueOf(bytes));
