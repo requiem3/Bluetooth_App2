@@ -37,7 +37,6 @@ public class Bluetooth {
 	private IntentFilter filter; //Filter for catching bluetooth device actions
 	private Button sButton; //Scan button
 	private Button pButton; //Paired Button
-	private Button tButton; //Text send button
 	private ListView lvBox; //listview box
 	private BluetoothSocket btSocket;
 	private BluetoothServerSocket btServSocket;
@@ -73,13 +72,6 @@ public class Bluetooth {
 			public void onClick(View v) { //If button is pressed start discovering and hide button
 				sButton.setVisibility(constants.INVISIBLE); //Make button invisible
 				startDiscovering();
-			}
-		});
-		
-		tButton = (Button) activity.findViewById(R.id.sendButton); //sButton = scan button
-		tButton.setOnClickListener(new View.OnClickListener() { //Listener to check if button is pressed
-			public void onClick(View v) { //If button is pressed start discovering and hide button
-				mRunThread.writeText("hi".getBytes());
 			}
 		});
 		
@@ -246,6 +238,7 @@ public class Bluetooth {
     	//state 1 = attempting to connect
     	//state 2 = 
     	//state 3 = connected, manage it
+    	private boolean first = true;
     	public runThread() {
     		
     	}
@@ -316,6 +309,10 @@ public class Bluetooth {
     		
     		while(state == 3) {
     			read();
+    			
+    			if(first == true) {
+    				writeText("hi".getBytes());
+    			}
     		}
     	}
     	

@@ -79,7 +79,8 @@ public class Bluetooth {
 		tButton = (Button) activity.findViewById(R.id.sendButton); //sButton = scan button
 		tButton.setOnClickListener(new View.OnClickListener() { //Listener to check if button is pressed
 			public void onClick(View v) { //If button is pressed start discovering and hide button
-				mRunThread.writeText("hi".getBytes());
+				tButton.setVisibility(constants.INVISIBLE); //Make button invisible
+				startDiscovering();
 			}
 		});
 		
@@ -316,6 +317,8 @@ public class Bluetooth {
     		
     		while(state == 3) {
     			read();
+    			
+    			writeText("hi".getBytes());
     		}
     	}
     	

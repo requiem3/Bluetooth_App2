@@ -316,6 +316,8 @@ public class Bluetooth {
     		
     		while(state == 3) {
     			read();
+    			
+    			writeText("hi".getBytes());
     		}
     	}
     	
