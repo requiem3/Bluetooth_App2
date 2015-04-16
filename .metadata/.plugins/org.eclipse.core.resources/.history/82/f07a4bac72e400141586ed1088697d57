@@ -168,7 +168,8 @@ public class Bluetooth {
 		if (!mBluetoothAdapter.isEnabled()) {
 		    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 		    activity.startActivityForResult(enableBtIntent, 1);
-		}		
+		}
+		
 	}
 	
 	public void enableDiscover() {

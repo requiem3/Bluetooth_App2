@@ -68,8 +68,6 @@ public class Bluetooth {
 		this.activity = activity; //Set class activity to the activity passed to it by the main activity window
 		//btChat = new Chat();
 		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-		enableDiscover(); //make device discoverable for other devices to find
-		
 		tView = (TextView) activity.findViewById(R.id.textView1);
 		mRunThread = new runThread(state);
 		 
@@ -168,7 +166,8 @@ public class Bluetooth {
 		if (!mBluetoothAdapter.isEnabled()) {
 		    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 		    activity.startActivityForResult(enableBtIntent, 1);
-		}		
+		}
+		
 	}
 	
 	public void enableDiscover() {
