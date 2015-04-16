@@ -16,6 +16,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -45,6 +46,7 @@ public class Bluetooth {
 	private InputStream iStream;
 	private OutputStream oStream;
 	private Integer state = 0;
+	private boolean first = true;
 	
 	private Chat btChat;
 	private Bluetooth_tests btTests;
@@ -59,11 +61,11 @@ public class Bluetooth {
 		btSocket = null;
 		btTests = new Bluetooth_tests(activity);
 		constants = new Constants();
-		mRunThread = new runThread();
 		this.activity = activity; //Set class activity to the activity passed to it by the main activity window
 		//btChat = new Chat();
 		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 		tView = (TextView) activity.findViewById(R.id.textView1);
+		mRunThread = new runThread(state);
 		 
 		sButton = (Button) activity.findViewById(R.id.scanButton); //sButton = scan button
 		sButton.setOnClickListener(new View.OnClickListener() { //Listener to check if button is pressed
@@ -113,6 +115,12 @@ public class Bluetooth {
         			
         			if(mRunThread.isAlive()) { //kill the current running thread
         				mRunThread.interrupt();
+        			}
+        			try {
+        				btSocket.connect();
+        			} catch(IOException e) {
+        				//TODO: something
+        				tView.setText("c f 3");
         			}
         			
         			mRunThread = new runThread(); //Create a new one
@@ -230,9 +238,19 @@ public class Bluetooth {
     	//state 1 = attempting to connect
     	//state 2 = 
     	//state 3 = connected, manage it
-    	
+    	private boolean first = true;
     	public runThread() {
     		
+    	}
+    	
+    	public runThread(int mState) {
+			try {
+    			btServSocket = mBluetoothAdapter.listenUsingInsecureRfcommWithServiceRecord
+    			(constants.NAME_INSECURE, constants.INSECURE_UUID);
+    		} catch(IOException e) {
+    			//TODO: something
+    			tView.setText("damn error");
+    		}
     	}
     	
     	public void run() {
@@ -245,13 +263,6 @@ public class Bluetooth {
     				tView.setText("listening");
     			}
     			
-    			try {
-        			btServSocket = mBluetoothAdapter.listenUsingInsecureRfcommWithServiceRecord
-        			(constants.NAME_INSECURE, constants.INSECURE_UUID);
-        		} catch(IOException e) {
-        			//TODO: something
-        			tView.setText("damn error");
-        		}
         		
         		try {
         			btSocket = btServSocket.accept();
@@ -262,13 +273,16 @@ public class Bluetooth {
         		
         		if(btSocket != null) {
         			state = 1;
-        			tView.setText("btSocket created");
+        			//tView.setText("btSocket created");
         			run();
         		}
         		
     		}
     		
-    		while(state == 1) {
+    		while(state == 1) {    			
+    			iStream = null;
+    			oStream = null;
+    			
     			try {
     				iStream = btSocket.getInputStream();
     			} catch(IOException e) {
@@ -283,7 +297,9 @@ public class Bluetooth {
     				tView.setText("no oStream");    			
     			}
     			
+    			
     			state = 3;
+    			
     			run();
     		}
     		
@@ -293,6 +309,11 @@ public class Bluetooth {
     		
     		while(state == 3) {
     			read();
+    			
+    			if(first == true) {
+    				writeText("hi".getBytes());
+    				first = false;
+    			}
     		}
     	}
     	
@@ -302,6 +323,8 @@ public class Bluetooth {
     		
     		try {
     			bytes = iStream.read(buffer);
+
+    			Log.i("WTF",String.valueOf(bytes));
     		} catch(IOException e) {
     			//TODO: something
     		}
