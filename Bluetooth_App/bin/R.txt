@@ -333,7 +333,8 @@ int drawable abc_textfield_default_mtrl_alpha 0x7f02002f
 int drawable abc_textfield_search_activated_mtrl_alpha 0x7f020030
 int drawable abc_textfield_search_default_mtrl_alpha 0x7f020031
 int drawable abc_textfield_search_material 0x7f020032
-int drawable ic_launcher 0x7f020033
+int drawable back 0x7f020033
+int drawable ic_launcher 0x7f020034
 int id action_bar 0x7f090031
 int id action_bar_activity_content 0x7f090003
 int id action_bar_container 0x7f090030
@@ -347,7 +348,7 @@ int id action_menu_presenter 0x7f090006
 int id action_mode_bar 0x7f09002e
 int id action_mode_bar_stub 0x7f09002d
 int id action_mode_close_button 0x7f090020
-int id action_settings 0x7f090044
+int id action_settings 0x7f090045
 int id activity_chooser_view_content 0x7f090021
 int id always 0x7f090014
 int id beginning 0x7f09001b
@@ -359,6 +360,7 @@ int id deviceList 0x7f090041
 int id dialog 0x7f090019
 int id disableHome 0x7f09000d
 int id dropdown 0x7f09001a
+int id editText1 0x7f090044
 int id edit_query 0x7f090033
 int id end 0x7f09001c
 int id expand_activities_button 0x7f090022
