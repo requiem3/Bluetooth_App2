@@ -24,10 +24,9 @@ public class Bluetooth_App extends ActionBarActivity {
 		    startActivityForResult(enableBtIntent, 1);
 		}
 		
-		onActivityResult(1,1,enableBtIntent);
-		
+		onActivityResult(enableBtIntent) {
 			
-		
+		}
 
 		bT = new Bluetooth(this);
 		

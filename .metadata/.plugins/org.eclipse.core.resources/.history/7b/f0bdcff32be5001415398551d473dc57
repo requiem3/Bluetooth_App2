@@ -19,16 +19,12 @@ public class Bluetooth_App extends ActionBarActivity {
 		
 		
 		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-		Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 		if (!mBluetoothAdapter.isEnabled()) {
+		    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 		    startActivityForResult(enableBtIntent, 1);
 		}
-		
-		onActivityResult(1,1,enableBtIntent);
-		
-			
-		
 
+		
 		bT = new Bluetooth(this);
 		
 		bT.isCompat();
