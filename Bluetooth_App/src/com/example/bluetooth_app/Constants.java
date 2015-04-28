@@ -11,6 +11,13 @@ public final class Constants {
 	public int SLISTEN = 1;
 	public int SCONNECTED = 2;
 	public int SCONNECTING = 3;
+	public int STATE_LISTENING = 0;
+	public int STATE_CONNECT = 1;
+	public int STATE_CONNECTED = 3;
+	//state 0 = listening
+	//state 1 = attempting to connect
+	//state 2 = 
+	//state 3 = connected, manage it
 	
 	public int READ_MESSAGE = 2;
 	public int WRITE_MESSAGE = 3;

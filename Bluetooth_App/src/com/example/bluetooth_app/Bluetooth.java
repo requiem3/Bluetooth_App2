@@ -3,9 +3,7 @@ package com.example.bluetooth_app;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.reflect.Method;
 import java.util.Set;
-import java.util.UUID;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -25,9 +23,6 @@ import android.widget.ListView;
 import android.widget.AdapterView;
 import android.widget.TextView;
 import Bt_tests.Bluetooth_tests;
-import Threading.alreadyConnectedThread;
-
-import com.example.bluetooth_app.*;
 
 public class Bluetooth {
 	private Constants constants;
@@ -35,7 +30,6 @@ public class Bluetooth {
 	private Activity activity; //Activity to store main window's activity
 	private ArrayAdapter<String> pDevices; //Array adapter for storing already paired devices
 	private ArrayAdapter<String> nDevices; //Array adapter for storing newly discovered devices
-	private ArrayAdapter<String> mMessages; //Array adapter for messages
 	private IntentFilter filter; //Filter for catching bluetooth device actions
 	private Button sButton; //Scan button
 	private Button pButton; //Paired Button
@@ -50,12 +44,6 @@ public class Bluetooth {
 	private InputStream iStream;
 	private OutputStream oStream;
 	private Integer state = 0;
-	private boolean first = true;
-	
-	private Chat btChat;
-	private Bluetooth_tests btTests;
-	private alreadyConnectedThread acThread;
-	
 	private runThread mRunThread;
     
 	/**
@@ -63,7 +51,7 @@ public class Bluetooth {
 	 */
 	public Bluetooth(Activity activity) {
 		btSocket = null;
-		btTests = new Bluetooth_tests(activity);
+		new Bluetooth_tests(activity);
 		constants = new Constants();
 		this.activity = activity; //Set class activity to the activity passed to it by the main activity window
 		//btChat = new Chat();
@@ -172,8 +160,8 @@ public class Bluetooth {
 	}
 	
 	public void enableDiscover() {
-		Intent discoverableIntent = new Intent(mBluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-		discoverableIntent.putExtra(mBluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 0); //always discoverable
+		Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+		discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 0); //always discoverable
 		activity.startActivity(discoverableIntent);
 	}
 	
@@ -256,14 +244,10 @@ public class Bluetooth {
     
     public void timeToPanic() { //When its time to panic, its time to panic
     	mBluetoothAdapter.cancelDiscovery();
-    	System.exit(1); //Force close the app
+    	System.exit(1); //Force close
     }
     
     public class runThread extends Thread {
-    	//state 0 = listening
-    	//state 1 = attempting to connect
-    	//state 2 = 
-    	//state 3 = connected, manage it
     	public runThread() {
     		
     	}
@@ -274,12 +258,12 @@ public class Bluetooth {
     			(constants.NAME_INSECURE, constants.INSECURE_UUID);
     		} catch(IOException e) {
     			//TODO: something
-    			tView.setText("damn error");
+    			tView.setText("Error");
     		}
     	}
     	
     	public void run() {
-    		while(state == 0) {
+    		while(state == constants.STATE_LISTENING) {
     			if(mBluetoothAdapter.isDiscovering()) {
     				mBluetoothAdapter.cancelDiscovery();
     			} 
@@ -297,14 +281,13 @@ public class Bluetooth {
         		}
         		
         		if(btSocket != null) {
-        			state = 1;
-        			//tView.setText("btSocket created");
+        			state = constants.STATE_CONNECT;
         			run();
         		}
         		
     		}
     		
-    		while(state == 1) {    			
+    		while(state == constants.STATE_CONNECT) {    			
     			iStream = null;
     			oStream = null;
     			
@@ -323,22 +306,19 @@ public class Bluetooth {
     			}
     			
     			
-    			state = 3;
+    			state = constants.STATE_CONNECTED;
     			
     			run();
     		}
     		
-    		while(state == 2) {
-    			
-    		}
-    		
-    		while(state == 3) {
+    		while(state == constants.STATE_CONNECTED) {
     			read();
     		}
     	}
     	
     	public String convertStreamToString(java.io.InputStream is) {
-    	    java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
+    	    @SuppressWarnings("resource")
+			java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
     	    return s.hasNext() ? s.next() : "";
     	}
     	
@@ -356,7 +336,7 @@ public class Bluetooth {
     					updateTView(readMessage);
     				}
     			});
-    			Log.i("WTF",String.valueOf(bytes));
+    			Log.i("Read",String.valueOf(bytes));
     		} catch(IOException e) {
     			//TODO: something
     		}

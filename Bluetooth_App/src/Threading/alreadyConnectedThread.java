@@ -33,7 +33,7 @@ public class alreadyConnectedThread extends Thread {
 			temp2 = socket.getOutputStream();
 		}
 		catch (IOException e) {
-			//TODO: do something lol
+			//TODO: do something
 		}
 		
 		iStream = temp1;
@@ -70,7 +70,7 @@ public class alreadyConnectedThread extends Thread {
 			mHandle.obtainMessage(constants.WRITE_MESSAGE, -1, -1, buffer).sendToTarget();
 		}
 		catch (IOException e) {
-			//TODO: do something because we we suck lol
+			//TODO: do something
 		}
 	}
 	
@@ -79,7 +79,7 @@ public class alreadyConnectedThread extends Thread {
 			btSocket.close();
 		}
 		catch(IOException e) {
-			//TODO: do something we didnt close the open socket lol
+			//TODO: do something
 		}
 	}
 
