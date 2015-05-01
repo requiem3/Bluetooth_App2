@@ -216,7 +216,7 @@ public class Bluetooth {
 	}
 	
     /**
-     * The BroadcastReceiver that listens for discovered devices
+     * The BroadcastReceiver that listens for discovered devicesithubgitgi
      */
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override

@@ -35,6 +35,7 @@ public class Bluetooth {
 	private Activity activity; //Activity to store main window's activity
 	private ArrayAdapter<String> pDevices; //Array adapter for storing already paired devices
 	private ArrayAdapter<String> nDevices; //Array adapter for storing newly discovered devices
+	private ArrayAdapter<String> mMessages; //Array adapter for messages
 	private IntentFilter filter; //Filter for catching bluetooth device actions
 	private Button sButton; //Scan button
 	private Button pButton; //Paired Button
@@ -67,6 +68,8 @@ public class Bluetooth {
 		this.activity = activity; //Set class activity to the activity passed to it by the main activity window
 		//btChat = new Chat();
 		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+		enableDiscover(); //make device discoverable for other devices to find
+		
 		tView = (TextView) activity.findViewById(R.id.textView1);
 		mRunThread = new runThread(state);
 		 
@@ -85,7 +88,7 @@ public class Bluetooth {
 			public void onClick(View v) { //If button is pressed start discovering and hide button
 				
 				String temp = eText.getText().toString();
-				mRunThread.writeText();
+				mRunThread.writeText(temp.getBytes());
 			}
 		});
 		
@@ -165,8 +168,13 @@ public class Bluetooth {
 		if (!mBluetoothAdapter.isEnabled()) {
 		    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 		    activity.startActivityForResult(enableBtIntent, 1);
-		}
-		
+		}		
+	}
+	
+	public void enableDiscover() {
+		Intent discoverableIntent = new Intent(mBluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+		discoverableIntent.putExtra(mBluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 0); //always discoverable
+		activity.startActivity(discoverableIntent);
 	}
 	
 	/**
@@ -178,6 +186,10 @@ public class Bluetooth {
 		} else {
 			return true;
 		}
+	}
+	
+	public void updateTView(String message) {
+		tView.setText(message);
 	}
 	
 	/**
@@ -325,13 +337,25 @@ public class Bluetooth {
     		}
     	}
     	
+    	public String convertStreamToString(java.io.InputStream is) {
+    	    java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
+    	    return s.hasNext() ? s.next() : "";
+    	}
+    	
     	public void read() {
     		byte buffer[] = new byte[1024];
-    		int bytes;
+    		final int bytes;
     		
     		try {
     			bytes = iStream.read(buffer);
-
+    			final String readMessage = new String(buffer, 0, bytes);
+    			
+    			activity.runOnUiThread(new Runnable() {
+    				@Override
+    				public void run() {
+    					updateTView(readMessage);
+    				}
+    			});
     			Log.i("WTF",String.valueOf(bytes));
     		} catch(IOException e) {
     			//TODO: something
