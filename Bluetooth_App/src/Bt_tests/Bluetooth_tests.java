@@ -7,6 +7,7 @@ import android.bluetooth.BluetoothSocket;
 
 public class Bluetooth_tests extends TestCase {
 	private alreadyConnectedThread acThread;
+	private BluetoothSocket btSocket;
 	private Activity activity;
 	
 	public Bluetooth_tests(Activity activity) { //Constructor for the tests class  

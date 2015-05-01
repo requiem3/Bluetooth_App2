@@ -10,12 +10,14 @@ import android.view.MenuItem;
 public class Bluetooth_App extends ActionBarActivity {
 	private Bluetooth bT;
 	private BluetoothAdapter mBluetoothAdapter;
+	private boolean flag = true;
 	  
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_bluetooth__app);
-				
+		
+		
 		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 		Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 		if (!mBluetoothAdapter.isEnabled()) {
@@ -24,10 +26,14 @@ public class Bluetooth_App extends ActionBarActivity {
 		
 		
 		
+			
+		
+
 		bT = new Bluetooth(this);
 		
 		bT.isCompat();
-		//bT.getAdapter();	
+		//bT.getAdapter();
+		
 	}
 	
 	@Override
