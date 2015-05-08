@@ -19,7 +19,7 @@ Currently you can no longer run the entire application by using tests and a virt
 
 -Click on the name of the phone that you want to connect to on the list that pops up. Wait about 4 seconds while it connects and a text label in the upper right should say "Connected2". If it says "cfs" then you hit a bug(described below in the bugs section).
 
--Once it is connected you can type the message you want to send into the text line andhit send on either of the phones.
+-Once it is connected you can type the message you want to send on either phone into the text line and hit send.
 ##Bugs
 -If you start the application without Bluetooth enabled it will crash
 
