@@ -13,7 +13,7 @@ The main idea behind the application was to create an app that would use Bluetoo
 Currently the application allows two devices to connect via Bluetooth and send messages. We have most of the threading classes completed for expanding into multiple devices but we ran out of time before we could implement it. The framework is there, but it needs a little bit more work to get to a point where it can work.
 
 ##Directions to Run
-Currently you can no longer run the entire application by using tests and a virtual device in Eclipse, it just became way too complicated and hard to maintain. You will need two Android phones and the app installed on both phones. Next follow these steps:
+Currently you can no longer run the entire application by using tests and a virtual device in Eclipse, it just became way too complicated and hard to maintain. You will need two Android phones and the app installed on both phones. Next follow these steps if you already know how to debug an Android application, else go to the bottom of this section and follow install guide:
 
 -Enable Bluetooth on both phones
 
@@ -24,6 +24,9 @@ Currently you can no longer run the entire application by using tests and a virt
 -Click on the name of the phone that you want to connect to on the list that pops up. Wait about 4 seconds while it connects and a text label in the upper right should say "Connected2". If it says "cfs" then you hit a bug(described below in the bugs section).
 
 -Once it is connected you can type the message you want to send on either phone into the text line and hit send.
+
+#####Install Guide:
+You will need to download the Android SDK Manager plugin for Eclipse. From there install all recommended packages and restart Eclipse. Next enable USB debugging on your phone(Google it if you need to) and plug it into your computer. Create a new run configuration so the app runs on your phone by going to: Run > Run Configurations > right click Android Application > choose the project, and under target tab select launch on all compatible devices. Now run the application with that run configuration and choose your phone. It should installthe app and start up.
 
 ##Bugs
 - If you start the application without Bluetooth enabled it will crash
