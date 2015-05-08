@@ -23,4 +23,7 @@ Currently you can no longer run the entire application by using tests and a virt
 ##Bugs
 -If you start the application without Bluetooth enabled it will crash
 
--Once you 
+-Once you connect you cannot reconnect to the same device if you close the app. This is a massive bug but we ran out of time before we could fix it. The way our multithreading runs it does not account or check for whether a Bluetooth socket currently exists between the two devices. It just goes to create a new Bluetooth socket and then you cannot connect to the device.
+
+-Does not work on some of the really cheap Android phones anymore after an API update. We all bought some really cheap $20 burner phones and it worked on them for awhile. Then LG did an API update on just their phones and it no longer works on specific ones, but should work on regular phones because it works on my Galaxy S4.
+##
