@@ -36,5 +36,6 @@ Currently you can no longer run the entire application by using tests and a virt
 Both phones are running the same version of the application with the same UUID. While the phone is not connected to another phone it is acting as the server and listening for incoming socket connection attempts. When one of the phones scans for available devices and then attempts to connect to one it acts as the client. The client sends a request to the server which then accepts it if the UUID is the same. Once the connection is accepted it creates a socket which then both phones can communicate over. Once you have the socket created the rest is fairly easy. This whole process runs in its own thread and using a state machine to determine which part it is doing(nothing, listening, connecting, or managing a connection). The rest of the app runs in the main Android UI thread.
 
 ##Location of Important Things
-- All diagrams/pictures are either located in this top section or in screenshots. We have all the UML/Sequence diagrams in here somewhere, either from our project or reference project.
-- 
+-All diagrams/pictures are either located in this top section or in screenshots. We have all the UML/Sequence diagrams in here somewhere, either from our project or reference project.
+
+-Android applications can be annoying to find code in so here are some important locations: https://github.com/requiem3/Bluetooth_App2/tree/master/Bluetooth_App/src (main code), https://github.com/requiem3/Bluetooth_App2/tree/master/Bluetooth_App/res/layout (XML layout aka. GUI)
