@@ -38,4 +38,4 @@ Both phones are running the same version of the application with the same UUID. 
 ##Location of Important Things
 -All diagrams/pictures are either located in this top section or in screenshots. We have all the UML/Sequence diagrams in here somewhere, either from our project or reference project.
 
--Android applications can be annoying to find code in so here are some important locations: https://github.com/requiem3/Bluetooth_App2/tree/master/Bluetooth_App/src (main code), https://github.com/requiem3/Bluetooth_App2/tree/master/Bluetooth_App/res/layout (XML layout aka. GUI)
+-Android applications can be annoying to find code in so here are some important locations: https://github.com/requiem3/Bluetooth_App2/tree/master/Bluetooth_App/src (main code, com/example/bluetooth_app is what currently runs, Threading is the framework for multiple phones that we never got around to implementing fully), https://github.com/requiem3/Bluetooth_App2/tree/master/Bluetooth_App/res/layout (XML layout aka. GUI)
