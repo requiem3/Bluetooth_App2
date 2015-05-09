@@ -1,5 +1,5 @@
 # Bluetooth_App2
-CSE 2102(Kyle Heitman, Jianxing Ke, Arif Prabawa, Christopher Cyriac)This is the second repository for the application because the first one's HEAD file got corrupted and we were unable to fix it. 
+CSE 2102(Kyle Heitman, Jianxing Ke, Arif Prabawa, Christopher Cyriac)This is the second repository for the application because the first one's HEAD file got corrupted and we were unable to fix it. In case accessed outside of repository, it can be accessed at this site: https://github.com/requiem3/Bluetooth_App2.
 
 ##User Profiles for Commits
 -Requiem3(Kyle Heitman)
