@@ -14,12 +14,21 @@ public class Bluetooth_tests extends TestCase {
 		this.activity = activity;
 	}
 	
+		
+	protected void setUp() throws Exception {
+		super.setUp();
+	}
+	
+	protected void tearDown() throws Exception {
+		super.tearDown();
+	}
+	
 	//This test no longer works after new implementation
 	public void startConnectedThread() { //starts the connected thread
 	//	acThread = new alreadyConnectedThread(activity); 
 		acThread.run();
 	}
-	
+
 	//This test no longer works after new implementation
 	public void runConnectedThread() {
 	//	acThread = new alreadyConnectedThread(activity);
