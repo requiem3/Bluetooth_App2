@@ -46,7 +46,7 @@ public class Bluetooth {
 	private BluetoothDevice mDevice;
 	private TextView tView;
 	private EditText eText;
-	
+	private static int count;
 	private InputStream iStream;
 	private OutputStream oStream;
 	private Integer state = 0;
@@ -62,6 +62,7 @@ public class Bluetooth {
 	 * default constructor, basic initializations
 	 */
 	public Bluetooth(Activity activity) {
+		count=0;
 		btSocket = null;
 		btTests = new Bluetooth_tests(activity);
 		constants = new Constants();
@@ -188,6 +189,10 @@ public class Bluetooth {
 		}
 	}
 	
+	public int getCount() {
+	return count;
+	}
+	
 	public void updateTView(String message) {
 		tView.setText(message);
 	}
@@ -222,6 +227,7 @@ public class Bluetooth {
 		    // Loop through paired devices
 		    for (BluetoothDevice device : pairedDevices) {
 		        // Add the name and address to an array adapter to show in a ListView
+		        count++;
 		    	pDevices.add(device.getName() + "\n" + device.getAddress());
 		    }
 		}
