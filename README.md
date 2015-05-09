@@ -8,6 +8,8 @@ CSE 2102(Kyle Heitman, Jianxing Ke, Arif Prabawa, Christopher Cyriac)This is the
 
 -ccyriac16(Christopher Cyriac)
 
+-ArifPrabawa(Arif Prabawa)
+
 ##Summary of Application
 The main idea behind the application was to create an app that would use Bluetooth meshnetworking to establish a chat room and let people connect and send messages to each other.
 
