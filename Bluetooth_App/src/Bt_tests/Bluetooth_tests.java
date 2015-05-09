@@ -27,3 +27,4 @@ public class Bluetooth_tests extends TestCase {
 		acThread.writeText(buffer);
 	}
 }
+
